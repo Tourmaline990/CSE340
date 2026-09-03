@@ -1,30 +1,273 @@
-html, body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
+/* =========================================================
+ CSE 340 Service Network Main Stylesheet ==========================
+ =============================== */
+ /* ========================================================= 
+ 1. DESIGN TOKENS Centralized values for the site's visual system.
+  ========================================================= */ 
+:root { 
+    /* Colors */ 
+    --color-primary: #155e75; 
+    --color-primary-dark: #164e63; 
+    --color-accent: #0369a1; 
+    --color-background: #f4f7f9;
+     --color-surface: #ffffff; 
+     --color-text: #17212b; 
+     --color-text-muted: #52606d; 
+     --color-border: #d9e2e8; 
+     
+     /* Spacing */
+      --space-xs: 0.5rem; 
+      --space-sm: 0.75rem; 
+      --space-md: 1rem; 
+      --space-lg: 1.5rem; 
+      --space-xl: 2rem; 
+      --space-2xl: 3rem; 
+      
+      /* Layout */ 
+      --content-width: 1100px;
+      
+      /* Component styling */ 
+      --radius-sm: 0.4rem; 
+      --radius-md: 0.75rem; 
+      --shadow-sm: 0 2px 8px rgb(0 0 0 / 8%); 
+    }
+   /* ========================================================= 
+   2. BASE / RESET Establish predictable sizing and page structure.
+    ========================================================= */
+    *, 
+    *::before,  
+     *::after { 
+        box-sizing: border-box;
+        /* y b4 & after for box sizing */
+     }
+     html { 
+        font-family: system-ui, 
+        -apple-system, 
+        BlinkMacSystemFont, 
+        "Segoe UI", 
+        sans-serif; 
+        line-height: 1.6; 
+    }
+    body { 
+        margin: 0; 
+        min-height: 100vh; 
+        display: flex; 
+        flex-direction: column; 
+        background: var(--color-background);
+         color: var(--color-text);
+     }
+     img { 
+        max-width: 100%;
+     }
+     /* =========================================================
+      3. NAVIGATION Flexbox controls the relationship between navigation links.
+       ========================================================= */
+    nav { 
+        background: var(--color-primary-dark); 
+        box-shadow: var(--shadow-sm); 
+    }
+    nav ul { 
+        max-width: var(--content-width); 
+        margin: 0 auto; 
+        padding: var(--space-md) var(--space-lg);
+         display: flex; 
+         justify-content: center; 
+         align-items: center; 
+         flex-wrap: wrap; 
+         gap: var(--space-sm) var(--space-lg); 
+         list-style: none; 
+        }
+     nav li { 
+        margin: 0;
+     }
+     nav a { 
+        display: block; 
+        padding: var(--space-xs) var(--space-sm); 
+        color: #ffffff; 
+        text-decoration: none;
+        font-weight: 600;
+        border-radius: var(--radius-sm); 
+        transition: background-color 160ms ease, color 160ms ease;
+        }
+    nav a:hover {
+     background-color: rgb(255 255 255 / 12%);
+     }
+    nav a:focus-visible { 
+        outline: 3px solid #ffffff;
+         outline-offset: 3px; 
+    }
+    /* =========================================================
+     4. MAIN CONTENT Provides the central responsive content area. 
+     ========================================================= */
+     main { 
+        width: min(100% - 2rem, var(--content-width)); 
+        margin: 0 auto; padding: var(--space-2xl) 0; 
+        flex: 1;
+     }
+     /* ========================================================= 
+     5. TYPOGRAPHY Establishes hierarchy and readable line lengths.
+      ========================================================= */
+      h1, 
+      h2 { 
+        margin-top: 0; 
+        line-height: 1.2;
+     }
+     h1 {
+         margin-bottom: var(--space-md); 
+         color: var(--color-primary-dark); 
+         font-size: clamp(2rem, 5vw, 3.5rem); 
+        }
+    h2 { 
+        margin-top: var(--space-xl); 
+        margin-bottom: var(--space-md); 
+        color: var(--color-primary); 
+        font-size: clamp(1.4rem, 3vw, 2rem); 
+    }
+    p { 
+        max-width: 70ch; 
+        margin-top: 0; 
+        margin-bottom: var(--space-lg); 
+        color: var(--color-text-muted); 
+    }
+    /* ========================================================= 
+    6. HOME PAGE LOGO Uses the existing .main-logo class. 
+    ========================================================= */
+     .main-logo { 
+        display: block; 
+        width: min(100%, 500px); 
+        height: auto; 
+        margin: var(--space-2xl) auto 0; 
+        border-radius: var(--radius-md); 
+        box-shadow: var(--shadow-sm);
+     }
+    /* =========================================================
+   7. CONTENT LISTS
+   Targets only lists that are direct children of <main>.
+   This prevents navigation <ul> from becoming cards.
+   ========================================================= */
+   main > ul {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(240px, 1fr)
+    );
+
+    gap: var(--space-lg);
+
+    margin: var(--space-xl) 0 0;
+    padding: 0;
+
+    list-style: none;
+}
+/* =========================================================
+   8. CONTENT CARDS
+   Shared visual treatment for projects, categories,
+   and organizations.
+   ========================================================= */
+main > ul > li {
+    padding: var(--space-lg);
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease;
+}
+main > ul > li:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgb(0 0 0 / 10%);
+}
+/* =========================================================
+   9. ORGANIZATION CARDS
+   :has(img) identifies organization list items without
+   requiring changes to the existing HTML.
+   ========================================================= */
+
+main > ul > li:has(img) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+main > ul > li img {
+    width: 120px;
+    height: 120px;
+
+    margin-bottom: var(--space-md);
+
+    object-fit: contain;
+}
+main > ul > li strong {
+    display: block;
+
+    margin-bottom: var(--space-xs);
+
+    color: var(--color-primary-dark);
+
+    font-size: 1.1rem;
+}
+/* =========================================================
+   10. FOOTER
+   Remains in normal document flow while flex: 1 on <main>
+   allows it to sit at the bottom on short pages.
+   ========================================================= */
+footer {
+    padding: var(--space-lg);
+
+    background: var(--color-primary-dark);
+
+    text-align: center;
+}
+footer p {
+    max-width: none;
+
     margin: 0;
-    padding: 20px;
+
+    color: rgb(255 255 255 / 85%);
+
+    font-size: 0.9rem;
+}
+/* =========================================================
+   11. RESPONSIVE ADJUSTMENTS
+   Most responsiveness is handled intrinsically above.
+   This breakpoint provides additional breathing room on
+   larger screens.
+   ========================================================= */
+@media (min-width: 768px) {
+    main {
+        padding-top: var(--space-2xl);
+        padding-bottom: var(--space-2xl);
+    }
 }
 
-body {
-    nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
-    }
-}                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
