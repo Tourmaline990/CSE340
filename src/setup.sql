@@ -1,3 +1,5 @@
+
+-- organization
 CREATE TABLE organization(
 organization_id SERIAL PRIMARY KEY,
 name VARCHAR (150) NOT NULL,
@@ -17,8 +19,7 @@ VALUES
 ('UnityServe Volunteers',' A volunteer coordination group supporting local charities and service initiatives.',
 'hello@unityserve.org','unityserve-logo.png')
 
--- projects inserts
-
+-- projects 
 CREATE TABLE projects(
 project_id SERIAL PRIMARY KEY,
 organization_id INT REFERENCES organization(organization_id),
@@ -28,7 +29,7 @@ location VARCHAR(255) NOT NULL,
 project_date DATE NOT NULL
 )
 
--- 
+-- projects inserts
 INSERT INTO projects (organization_id,title,description,location,project_date)
 VALUES
    ( 1,'Clean Water Initiative','Installation of boreholes and clean water systems in underserved communities.',
@@ -47,3 +48,48 @@ VALUES
 	(1, 'Solar Power Installation', 'Installing solar-powered lighting systems in communities with limited electricity access.', 'Maiduguri, Nigeria', '2027-01-25'), 
 	(2, 'Waste Management Campaign', 'Organizing community clean-up activities and promoting responsible waste disposal.', 'Port Harcourt, Nigeria', '2027-02-02'), 
 	(3, 'Orphanage Support Project', 'Providing educational materials, food, clothing, and essential supplies to children in care.', 'Ilorin, Nigeria', '2027-02-14');
+
+
+-- categories
+CREATE TABLE categories(
+category_id SERIAL PRIMARY KEY,
+category_name VARCHAR(255) NOT NULL
+)
+--categories inserts
+INSERT INTO categories(category_name)
+VALUES 
+('Health and Wellness'),
+('Environment and Nature'),
+('Education'),
+('Animal Welfare'),
+('Senior Care and Companionship'),
+('Community Service')
+
+
+-- service category
+CREATE TABLE service_category(
+ project_id INT,
+ category_id INT,
+ PRIMARY KEY (project_id,category_id),
+ FOREIGN KEY (project_id) REFERENCES project(project_id),
+ FOREIGN KEY (category_id) REFERENCES categories(category_id)
+)
+
+-- service_categories inserts
+INSERT INTO service_category(project_id,category_id)
+VALUES
+(1,3),
+(2,1),
+(3,2),
+(4,5),
+(5,4),
+(6,6),
+(7,6),
+(8,3),
+(9,2),
+(10,1),
+(11,5),
+(12,4),
+(13,3),
+(14,6),
+(15,6)
