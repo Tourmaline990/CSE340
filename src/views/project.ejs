@@ -1,0 +1,11 @@
+<%- include('partials/header')%>
+<main>
+    <% projectDetails.forEach(detail => { %>
+        <h1><%= detail.title %></h1>
+        <p><%= detail.description %></p>
+        <p><%= new Date(detail.project_date).toDateString() %></p>
+        <p><%= detail.location %></p>
+        <a href="/organization/<%= detail.organization_id %>"><%= detail.name %></a>
+    <% }); %>
+</main>
+<%- include('partials/footer')%>

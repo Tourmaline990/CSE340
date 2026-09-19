@@ -7,5 +7,6 @@ const showCategoryPage = async(req,res) => {
      const categories = await getAllCategories();
      res.render('categories',{title,categories})
 }
+
 // export
 export {showCategoryPage}
