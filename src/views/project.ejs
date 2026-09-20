@@ -6,6 +6,12 @@
         <p><%= new Date(detail.project_date).toDateString() %></p>
         <p><%= detail.location %></p>
         <a href="/organization/<%= detail.organization_id %>"><%= detail.name %></a>
+    
     <% }); %>
+    <ul>
+        <% projectCategoryTags.forEach(category => { %>
+            <li><a href="/category/<%= category.category_id%>"><%= category.category_name%></a></li>
+        <% })%>
+    </ul>
 </main>
 <%- include('partials/footer')%>

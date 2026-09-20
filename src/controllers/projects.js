@@ -1,5 +1,6 @@
 // imports
-import { getAllProjects,getUpcomingProjects,getProjectDetails } from "../models/project.js";
+import { getUpcomingProjects,getProjectDetails} from "../models/project.js";
+import { getCategoryTagByProjectId } from "../models/categories.js";
 
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
 // controller functions
@@ -13,9 +14,9 @@ const showProjectPage = async(req, res) => {
 const showProjectDetailsPage = async (req,res) => {
    const projectId = req.params.id;
    const projectDetails = await getProjectDetails(projectId);
+   const projectCategoryTags = await getCategoryTagByProjectId(projectId)
    const title = projectDetails.length > 0 ? projectDetails[0].title : 'Project Details';
-   console.log('project details',projectDetails);
-   res.render('project',{title,projectDetails})
+   res.render('project',{title,projectDetails,projectCategoryTags})
 }
 
 // exports
