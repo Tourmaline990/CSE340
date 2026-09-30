@@ -65,5 +65,23 @@ const getProjectDetails = async (id) => {
    return result.rows
 }
 
+const createProject = async(organization_id,title,description,location,project_date) => {
+  const query = `
+   INSERT INTO projects(organization_id,title,description,location,project_date)
+   VALUES($1,$2,$3,$4,$5)
+   RETURNING project_id
+  `
+  const queryParams = [organization_id,title,description,location,project_date]
+  const result = await db.query(query,queryParams)
+  if(result.rows.length === 0){
+    throw new Error('failed to create service project');
+  }
+  if(process.env.ENABLE_SQL_LOGGING === true){
+    console.log("created service project with Id:",result.rows[0].project_id);
+  }
+  return result.rows[0].project_id;
+}
 
-export {getAllProjects,getProjectsByOrganizationId,getUpcomingProjects,getProjectDetails,getServiceProjectsByCategoryId}
+export {getAllProjects,getProjectsByOrganizationId,getUpcomingProjects,getProjectDetails,getServiceProjectsByCategoryId,
+  createProject
+}

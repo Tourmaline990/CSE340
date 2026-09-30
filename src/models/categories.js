@@ -32,4 +32,24 @@ const getCategoryTagByProjectId = async(projectId) => {
    const result = await db.query(query,queryParams)
    return result.rows;
 }
-export {getAllCategories,getCategoryTagByProjectId,getCategoryName}
+const assignCategoryToProject = async(projectId,categoryId) => {
+  const query = `
+   INSERT INTO service_category (project_id,category_id)
+   VALUES
+   ($1,$2)
+  `
+  const queryParams = [projectId,categoryId]
+   await db.query(query,queryParams)
+}
+const updateCategoryAssignment =  async(projectId,categoryIds) => {
+   const deleteQuery = `
+     DELETE FROM service_category
+     WHERE project_id = $1
+   `
+   const deleteQueryParams = [projectId]
+   await db.query(deleteQuery,deleteQueryParams)
+   for (const categoryId of categoryIds) {
+     await assignCategoryToProject(projectId,categoryId)
+   }
+}
+export {getAllCategories,getCategoryTagByProjectId,getCategoryName,updateCategoryAssignment}
