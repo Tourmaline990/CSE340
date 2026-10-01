@@ -164,7 +164,7 @@
    Shared visual treatment for projects, categories,
    and organizations.
    ========================================================= */
-main > ul > li {
+main > ul > li{
     padding: var(--space-lg);
 
     background: var(--color-surface);
@@ -213,6 +213,7 @@ main > ul > li strong {
 
     font-size: 1.1rem;
 }
+
 /* =========================================================
    10. FOOTER
    Remains in normal document flow while flex: 1 on <main>
@@ -272,13 +273,76 @@ footer p {
         padding-bottom: var(--space-2xl);
     }
 }
+.cta,
+button[type="submit"] {
+   display:block;
+   background-color: var(--color-primary);
+   color: var(--color-surface);
+   padding: var(--space-sm) var(--space-md);
+   width: fit-content;
+   border-radius: var(--radius-sm);
+   text-decoration: none;
+   text-align: center;
+   margin: var(--space-md) auto 0;
 
-
-
-
-
-
-
+   box-shadow: var(--shadow-sm);
+   transition:
+        transform 160ms ease,
+        box-shadow 160ms ease;
+}
+.cta:hover,button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 10%);
+    background-color: var(--color-accent);
+}
+main > ul > li > a{
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: var(--space-md);
+}
+strong > a{
+    text-decoration: none;
+    color: var(--color-primary-dark);
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+input[type="text"], input[type="email"], textarea,input[type="date"],select{
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    width: 70%;
+    border-left: 2px solid var(--color-primary-dark);
+}
+input:valid{
+    border-color: var(--color-primary);
+}
+input:invalid:focus{
+    border-color: crimson;
+}
+button[type="submit"]{
+    border: none;
+    cursor: pointer;
+}
+label{
+    max-width: 70ch;
+}
+.button-container{
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+}
+.form-group:has(input[type="checkbox"]){
+  flex-direction: row;
+}
+input[type="checkbox"]{
+    width: 44px;
+    height: 20px;
+    margin-right: var(--space-xs);
+}
 
 
 

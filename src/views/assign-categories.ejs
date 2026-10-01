@@ -4,11 +4,13 @@
     <h2><%= title%></h2>
     <form action="/assign-categories/<%= projectDetails[0].project_id%>" method="post">
         <%allCategories.forEach(cat => { %>
-           <input type="checkbox" id="<%= cat.category_id %>" name="categories" value="<%= cat.category_id%>"
-           <%= projectCategories.find(category => cat.category_id === category.category_id)? 'checked': '' %>>
-           <label for="<%= cat.category_id %>"><%= cat.category_name %></label>
-      <% })%> 
-      <button type="submit">Update categories</button>
+            <div class="form-group">
+                <input type="checkbox" id="<%= cat.category_id %>" name="categories" value="<%= cat.category_id%>"
+                <%= projectCategories.find(category => cat.category_id === category.category_id)? 'checked': '' %>>
+                <label for="<%= cat.category_id %>"><%= cat.category_name %></label>
+            </div>
+        <% })%> 
+        <button type="submit">Update categories</button>
     </form>
 </main>
 <%- include('partials/footer')%>

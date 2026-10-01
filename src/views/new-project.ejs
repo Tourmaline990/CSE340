@@ -2,24 +2,34 @@
 <main>
     <h1><%= title%></h1>
     <form action="/new-project" method="post">
-        <label for="title">Enter a title</label>
-        <input type="text" id="title" name="title" required maxlength="150">
+        <div class="form-group">
+            <label for="title">Enter a title</label>
+            <input type="text" id="title" name="title" required maxlength="150">
+        </div>
 
-        <label for="description">Enter a description</label>
-        <textarea name="description" id="description" required maxlength="500"></textarea>
+        <div class="form-group">
+            <label for="description">Enter a description</label>
+            <textarea name="description" id="description" required maxlength="500"></textarea>
+        </div>
 
-        <label for="location">Enter Location</label>
-        <input type="text" name="location" id="location" required maxlength="255">
+        <div class="form-group">
+            <label for="location">Enter Location</label>
+            <input type="text" name="location" id="location" required maxlength="255">
+        </div>
 
-        <label for="project_date">Enter a date</label>
-        <input type="date" id="project_date" name="project_date" required>
-        
+        <div class="form-group">
+            <label for="project_date">Enter a date</label>
+            <input type="date" id="project_date" name="project_date" required>
+        </div>
+        <div class="form-group">
+        <label for="organization_id">Select Organization</label>
         <select name="organization_id" id="organization_id" required>
             <option value="" selected>--select organization--</option>
             <%organizations.forEach(org => { %>
                <option value="<%= org.organization_id%>"><%= org.name%></option>
            <% })%>
         </select>
+        </div>
            <button type="submit">Create Project</button>
     </form>
 </main>

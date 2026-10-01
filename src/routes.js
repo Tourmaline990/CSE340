@@ -1,6 +1,6 @@
 import express from "express";
 import { showHomePage } from "./controllers/index.js";
-import { showCategoryPage,showCategoryServiceProjectPage,showAssignCategoriesForm,processAssignCategoryForm} from "./controllers/categories.js";
+import { showCategoryPage,categoryValidation,showCategoryServiceProjectPage,showAssignCategoriesForm,processAssignCategoryForm,showNewCategoryPage,processNewCategoryPage, showEditCategoryPage, processEditCategoryPage} from "./controllers/categories.js";
 import { showOrganizationsPage } from "./controllers/organization.js";
 import { showProjectPage,showProjectDetailsPage,showNewProjectForm,processNewProjectForm,projectValidation,showEditProjectForm,processEditProjectForm} from "./controllers/projects.js";
 import { testErrorPage } from "./controllers/error.js";
@@ -26,7 +26,10 @@ router.get('/assign-categories/:id',showAssignCategoriesForm)
 router.post('/assign-categories/:id',processAssignCategoryForm)
 router.get('/edit-project/:id',showEditProjectForm)
 router.post('/edit-project/:id',processEditProjectForm)
-
+router.get('/new-category',showNewCategoryPage)
+router.post('/new-category',categoryValidation,processNewCategoryPage)
+router.get('/edit-category/:id',showEditCategoryPage)
+router.post('/edit-category/:id',categoryValidation,processEditCategoryPage)
 // error handler
 router.get('/test-error',testErrorPage);
 

@@ -3,20 +3,30 @@
     <h1><%= title%></h1>
     <form action="/edit-project/<%= projectId%>" method="post">
         <% projectDetails.forEach(project => { %>
+            <div class="form-group">
             <label for="title">Enter Project Title</label>
             <input type="text" id="title" value="<%= project.title%>" name="title" required>
-            <label for="description">Enter project Description</label>
-            <input type="text" id="description" value="<%= project.description%>" name="description" required>
-            <label for="location">Enter Location</label>
-            <input type="text" name="location" id="location" value="<%= project.location%>" required>
-            <label for="project_date">Enter Project Date</label>
-            <input type="date" name="project_date" id="project_date" value="<%= project.project_date.toISOString().split('T')[0]%>" required>
-            <label for="organization_id">Select organization</label>
-                 <select name="organization_id" id="organization_id" required>
-                     <% organizations.forEach(org => { %>
-                           <option value="<%= org.organization_id%>" <%= org.organization_id === project.organization_id ? 'selected' : '' %>><%= org.name%></option>
-                     <% })%>
-                 </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Enter project Description</label>
+                <input type="text" id="description" value="<%= project.description%>" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Enter Location</label>
+                <input type="text" name="location" id="location" value="<%= project.location%>" required>
+            </div>
+            <div class="form-group">
+                <label for="project_date">Enter Project Date</label>
+                <input type="date" name="project_date" id="project_date" value="<%= project.project_date.toISOString().split('T')[0]%>" required>
+            </div>
+            <div class="form-group">
+                <label for="organization_id">Select organization</label>
+                <select name="organization_id" id="organization_id" required>
+                    <% organizations.forEach(org => { %>
+                          <option value="<%= org.organization_id%>" <%= org.organization_id === project.organization_id ? 'selected' : '' %>><%= org.name%></option>
+                    <% })%>
+                </select>
+            </div>
        <% })%>
        <button type="submit">Update Project</button>
     </form>
