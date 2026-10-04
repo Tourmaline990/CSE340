@@ -76,7 +76,7 @@ const createProject = async(organization_id,title,description,location,project_d
   if(result.rows.length === 0){
     throw new Error('failed to create service project');
   }
-  if(process.env.ENABLE_SQL_LOGGING === true){
+  if(process.env.ENABLE_SQL_LOGGING === 'true'){
     console.log("created service project with Id:",result.rows[0].project_id);
   }
   return result.rows[0].project_id;
@@ -94,7 +94,7 @@ const updateProject = async(project_id,organization_id,title,description,locatio
   if(result.rows.length === 0){
      throw new Error('Failed to update project')
   }
-  if(process.env.ENABLE_SQL_LOGGING === true){
+  if(process.env.ENABLE_SQL_LOGGING === 'true'){
     console.log("updated organization with Id :",result.rows[0].project_id)
   }
   return project_id;

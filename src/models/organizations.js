@@ -67,7 +67,7 @@ const updateOrganization = async(organization_id,name,description,contact_email,
    if(result.rows.length === 0){
       throw new Error('failed to update organization')
    }
-   if(process.env.ENABLE_SQL_LOGGING === true){
+   if(process.env.ENABLE_SQL_LOGGING === 'true'){
      console.log('Updated organization: ID:', result.rows[0].organization_id);
    }
    return result.rows[0].organization_id;

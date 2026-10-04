@@ -63,7 +63,7 @@ const createNewCategory = async(category_name) => {
     if(result.rows.length === 0){
        throw new Error("Failed to create category")
     }
-    if(process.env.ENABLE_SQL_LOGGING === true){
+    if(process.env.ENABLE_SQL_LOGGING === 'true'){
        console.log("created category with id:",result.rows[0].category_id)
     }
     return result.rows[0].category_id;
@@ -81,7 +81,7 @@ const updateCategory = async(category_id,category_name) => {
   if(result.rows.length === 0){
    throw new Error('failed to update category')
   }
-  if(process.env.ENABLE_SQL_LOGGING === true){
+  if(process.env.ENABLE_SQL_LOGGING === 'true'){
    console.log("updated category with id:",result.rows[0].category_id)
   }
   return result.rows[0].category_id

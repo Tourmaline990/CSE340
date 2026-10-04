@@ -6,6 +6,9 @@ import { showProjectPage,showProjectDetailsPage,showNewProjectForm,processNewPro
 import { testErrorPage } from "./controllers/error.js";
 import { showOrganizationDetailsPage,showNewOrganizationForm,processNewOrganizationForm,organizationValidation,
     showEditOrganizationForm,processEditOrganizationForm} from "./controllers/organization.js";
+import { userValidation,showUserRegistrationForm,processUserRegistrationForm, showLoginPage,processLogOut,processLoginForm, requireLogin, showDashboard,
+    requireRole
+ } from "./controllers/users.js";
 
 const router = express.Router();
 
@@ -16,20 +19,28 @@ router.get('/organizations',showOrganizationsPage);
 router.get('/organization/:id',showOrganizationDetailsPage)
 router.get('/project/:id',showProjectDetailsPage)
 router.get('/category/:id',showCategoryServiceProjectPage)
-router.get("/new-organization",showNewOrganizationForm)
-router.post("/new-organization",organizationValidation,processNewOrganizationForm)
-router.get('/edit-organization/:id',showEditOrganizationForm)
-router.post('/edit-organization/:id',organizationValidation,processEditOrganizationForm)
-router.get('/new-project',showNewProjectForm)
-router.post('/new-project',projectValidation,processNewProjectForm)
-router.get('/assign-categories/:id',showAssignCategoriesForm)
-router.post('/assign-categories/:id',processAssignCategoryForm)
-router.get('/edit-project/:id',showEditProjectForm)
-router.post('/edit-project/:id',processEditProjectForm)
-router.get('/new-category',showNewCategoryPage)
-router.post('/new-category',categoryValidation,processNewCategoryPage)
-router.get('/edit-category/:id',showEditCategoryPage)
-router.post('/edit-category/:id',categoryValidation,processEditCategoryPage)
+router.get("/new-organization",requireRole('admin'),showNewOrganizationForm)
+router.post("/new-organization",requireRole('admin'),organizationValidation,processNewOrganizationForm)
+router.get('/edit-organization/:id',requireRole('admin'),showEditOrganizationForm)
+router.post('/edit-organization/:id',requireRole('admin'),organizationValidation,processEditOrganizationForm)
+router.get('/new-project',requireRole('admin'),showNewProjectForm)
+router.post('/new-project',requireRole('admin'),projectValidation,processNewProjectForm)
+router.get('/assign-categories/:id',requireRole('admin'),showAssignCategoriesForm)
+router.post('/assign-categories/:id',requireRole('admin'),processAssignCategoryForm)
+router.get('/edit-project/:id',requireRole('admin'),showEditProjectForm)
+router.post('/edit-project/:id',requireRole('admin'),processEditProjectForm)
+router.get('/new-category',requireRole('admin'),showNewCategoryPage)
+router.post('/new-category',requireRole('admin'),categoryValidation,processNewCategoryPage)
+router.get('/edit-category/:id',requireRole('admin'),showEditCategoryPage)
+router.post('/edit-category/:id',requireRole('admin'),categoryValidation,processEditCategoryPage)
+router.get('/register',showUserRegistrationForm)
+router.post('/register',userValidation,processUserRegistrationForm)
+router.get('/login',showLoginPage)
+router.post('/login',processLoginForm)
+router.get('/logout',processLogOut)
+
+// protected route
+router.get('/dashboard',requireLogin,showDashboard)
 // error handler
 router.get('/test-error',testErrorPage);
 

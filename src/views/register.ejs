@@ -1,0 +1,19 @@
+<%- include('partials/header')%>
+<main>
+    <form action="/register" method="post">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required maxlength="100">
+      </div>
+      <div class="form-group">
+        <label for="email">Email(Username)</label>
+        <input type="email" name="email" id="email" required maxlength="100">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required maxlength="255">
+      </div>
+      <button type="submit" class="cta">Register</button>
+    </form>
+</main>
+<%- include('partials/footer')%>

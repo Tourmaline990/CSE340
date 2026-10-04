@@ -60,6 +60,7 @@ const showEditOrganizationForm = async(req,res) => {
    res.render('edit-organization',{title,organizationDetails})
 }
 const processEditOrganizationForm = async(req,res) => {
+   const id = req.params.id;
   const result = validationResult(req)
   if(!result.isEmpty()){
      result.array().forEach(error => {
@@ -67,7 +68,6 @@ const processEditOrganizationForm = async(req,res) => {
      })
      return res.redirect(`/edit-organization/${id}`)
   }
-  const id = req.params.id;
   const {name,description,contactEmail,logo_filename} = req.body;
  await updateOrganization(id,name,description,contactEmail,logo_filename)
 

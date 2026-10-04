@@ -13,7 +13,9 @@
     </li>
   <%  })%>
 </ul>
-<a href="/new-project" class="cta">Create a new service project</a>
+ <% if(user && user.role_name === 'admin'){ %>
+  <a href="/new-project" class="cta">Create a new service project</a>
+ <% }%>
     </main>
 <%- include('partials/footer')%>
 

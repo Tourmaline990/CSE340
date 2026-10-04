@@ -12,7 +12,9 @@
       </li>
    <% })%>
 </ul>
-  <a href="/new-organization" class="cta">Add a new organization</a>
+  <% if(user && user.role_name === 'admin') { %>
+    <a href="/new-organization" class="cta">Add a new organization</a>
+  <% }%>
     </main>
 <%- include('partials/footer')%>
 
