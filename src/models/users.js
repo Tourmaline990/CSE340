@@ -52,4 +52,17 @@ const authenticateUser = async(email,password) => {
     return user;
 }
 
-export {createUser,authenticateUser}
+const getAllUsers = async() => {
+    const query = `
+       SELECT user_id,name,email,role_name
+       FROM users
+       JOIN roles ON users.role_id = roles.role_id
+    `
+    const result = await db.query(query);
+    if(result.rows.length === 0){
+         console.log('no users found')
+    }
+    return result.rows;
+}
+
+export {createUser,authenticateUser,getAllUsers}

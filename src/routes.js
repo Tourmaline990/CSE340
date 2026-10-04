@@ -7,7 +7,8 @@ import { testErrorPage } from "./controllers/error.js";
 import { showOrganizationDetailsPage,showNewOrganizationForm,processNewOrganizationForm,organizationValidation,
     showEditOrganizationForm,processEditOrganizationForm} from "./controllers/organization.js";
 import { userValidation,showUserRegistrationForm,processUserRegistrationForm, showLoginPage,processLogOut,processLoginForm, requireLogin, showDashboard,
-    requireRole
+    requireRole,
+    showAllUserPage
  } from "./controllers/users.js";
 
 const router = express.Router();
@@ -38,6 +39,7 @@ router.post('/register',userValidation,processUserRegistrationForm)
 router.get('/login',showLoginPage)
 router.post('/login',processLoginForm)
 router.get('/logout',processLogOut)
+router.get("/all-users",requireRole('admin'),showAllUserPage)
 
 // protected route
 router.get('/dashboard',requireLogin,showDashboard)

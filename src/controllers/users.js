@@ -1,5 +1,5 @@
 import { validationResult,body } from "express-validator";
-import { createUser, authenticateUser} from "../models/users.js";
+import { createUser, authenticateUser, getAllUsers} from "../models/users.js";
 import bcrypt from 'bcrypt';
 
 const userValidation = [
@@ -95,13 +95,19 @@ const requireRole = (role) => {
      }
       if(req.session.user.role_name !== role){
         req.flash("error",'You do not have permission to access this page');
-         return res.redirect('/')
+         return res.redirect('/dashboard')
       }
       return next();
       
    }
 }
+
+const showAllUserPage = async(req,res) => {
+  const allUsers = await getAllUsers();
+  const title = 'All Users';
+  res.render("all-users",{allUsers,title})
+}
 export {processUserRegistrationForm,showUserRegistrationForm,userValidation,
     processLoginForm,processLogOut,showLoginPage,requireLogin,showDashboard,
-    requireRole
+    requireRole,showAllUserPage
 }
