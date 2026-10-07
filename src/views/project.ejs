@@ -10,10 +10,21 @@
     <% }); %>
     <ul>
         <% projectCategoryTags.forEach(category => { %>
-            <li><a href="/category/<%= category.category_id%>"><%= category.category_name%></a></li>
+            <li class="group"><a href="/category/<%= category.category_id%>"><%= category.category_name%></a></li>
         <% })%>
     </ul>
-    <% if(user && user.role_name){ %>
+    <% if(isLoggedIn && !volunteer.some(v => v.projectId === projectDetails[0].project_id)){ %>
+        <form action="/volunteer/<%= projectDetails[0].project_id%>" method="POST">
+            <button type="submit" class="cta">Volunteer</button>
+        </form>
+   <% }%>
+   <% if(isLoggedIn && volunteer.some(v => v.projectId === projectDetails[0].project_id)){ %>
+        <form action="/unvolunteer/<%= projectDetails[0].project_id%>" method="POST">
+            <p>You have volunteered for this project.</p>
+            <button type="submit" class="cta">Unvolunteer</button>
+        </form>
+    <% }%>
+    <% if(user && user.role_name === "admin"){ %>
         <div class="button-container">
         <a href="/assign-categories/<%= projectDetails[0].project_id%>" class="cta">Edit categories</a>
         <a href="/edit-project/<%= projectDetails[0].project_id%>" class="cta">Edit Project Information</a>

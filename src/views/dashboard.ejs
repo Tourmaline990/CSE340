@@ -6,6 +6,22 @@
     <p>Name: <%= name %></p>
     <p>Username: <%= email %></p>
 
+    <h2>Volunteered Projects</h2>
+    <% if(volunteeredProjects.length > 0) { %>
+        <ul>
+            <% volunteeredProjects.forEach(project => { %>
+                <li class="group"><a href="/project/<%= project.project_id%>"><%= project.title%></a>
+                <form action="/unvolunteer/<%= project.project_id %>" method="post">
+                    <button type="submit">Unvolunteer</button>
+                </form>
+                </li>
+            <% })%>
+        </ul>
+    <% } else { %>
+        <p>You have not volunteered for any projects yet.</p>
+        <a href="/projects" class="cta">Browse Projects</a>
+    <% } %>
+
     <% if(user && user.role_name === 'admin') { %>
         <a href="/all-users" class="cta">View All Users</a>
     <% }%>

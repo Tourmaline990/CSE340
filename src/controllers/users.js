@@ -1,6 +1,7 @@
 import { validationResult,body } from "express-validator";
 import { createUser, authenticateUser, getAllUsers} from "../models/users.js";
 import bcrypt from 'bcrypt';
+import { getProjectsByVolunteers } from "../models/volunteer.js";
 
 const userValidation = [
    body('name').trim().notEmpty().withMessage('Name is required.').
@@ -81,10 +82,11 @@ const requireLogin =  async(req,res,next) => {
     next()
 }
 
-const showDashboard = (req,res) => {
+const showDashboard = async (req,res) => {
    const {name,email} = req.session.user;
-   const title  = 'Dashboard'
-   res.render('dashboard',{name,email,title})
+   const title  = 'Dashboard';
+   const volunteeredProjects = await getProjectsByVolunteers(req.session.user.user_id);
+   res.render('dashboard',{name,email,title,volunteeredProjects})
 }
 
 const requireRole = (role) => {

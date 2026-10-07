@@ -5,6 +5,7 @@ import { testConnection } from './src/models/db.js';
 import router from './src/routes.js';
 import session from 'express-session'
 import flash from './src/middleware/flash.js';
+import { getProjectsByVolunteers } from './src/models/volunteer.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production'
 const PORT = process.env.PORT || 3000;
@@ -43,10 +44,14 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
     res.locals.isLoggedIn = false;
     if(req.session && req.session.user){
        res.locals.isLoggedIn = true;
+       // model fn here so volunteered projects persists.
+       // An updated volunteered project list across each requests.  
+       const volunteered = await getProjectsByVolunteers(req.session.user.user_id);
+       res.locals.volunteer = volunteered.map((p) => ({ projectId: p.project_id })) || [];
     } 
     res.locals.user = req.session.user || null;
     res.locals.NODE_ENV = NODE_ENV;

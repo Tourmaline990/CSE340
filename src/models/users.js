@@ -44,7 +44,7 @@ const authenticateUser = async(email,password) => {
     if(!user){
       return user;
     }
-    if(verifyPassword(password,user.password_hash)){
+    if(await verifyPassword(password,user.password_hash)){
          const {password_hash, ...userWithoutHash} = user;
          console.log(userWithoutHash);
          return userWithoutHash;

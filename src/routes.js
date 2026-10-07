@@ -10,6 +10,7 @@ import { userValidation,showUserRegistrationForm,processUserRegistrationForm, sh
     requireRole,
     showAllUserPage
  } from "./controllers/users.js";
+ import { volunteerForProject,removeVolunteerForProject } from "./controllers/volunteer.js";
 
 const router = express.Router();
 
@@ -43,6 +44,8 @@ router.get("/all-users",requireRole('admin'),showAllUserPage)
 
 // protected route
 router.get('/dashboard',requireLogin,showDashboard)
+router.post('/volunteer/:id',requireLogin,volunteerForProject)
+router.post('/unvolunteer/:id',requireLogin,removeVolunteerForProject)
 // error handler
 router.get('/test-error',testErrorPage);
 
