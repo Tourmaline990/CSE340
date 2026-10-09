@@ -178,7 +178,10 @@ main > ul > li{
         transform 160ms ease,
         box-shadow 160ms ease;
 }
-main > ul > li:hover {
+main > ul > li:hover,
+input:focus,
+input:hover{
+
     transform: translateY(-2px);
 
     box-shadow: 0 6px 18px rgb(0 0 0 / 10%);
@@ -290,7 +293,8 @@ button[type="submit"] {
         transform 160ms ease,
         box-shadow 160ms ease;
 }
-.cta:hover,button[type="submit"]:hover {
+.cta:hover,
+button[type="submit"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgb(0 0 0 / 10%);
     background-color: var(--color-accent);
@@ -308,25 +312,28 @@ strong > a{
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    margin-bottom: var(--space-md);
+    width: 100%;    
 }
-input[type="text"], input[type="email"],
- textarea,input[type="date"],input[type="password"]select{
+input,textarea,select{
     padding: var(--space-sm);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    width: 70%;
+    border-radius: 8px;
+    width: 80%;
     border-left: 2px solid var(--color-primary-dark);
+    outline: none;
+    font-size: 16px;
 }
-input:valid{
+input:valid,textarea:valid{
     border-color: var(--color-primary);
 }
-input:invalid:focus{
+input:invalid:focus,textarea:invalid:focus{
     border-color: crimson;
 }
 button[type="submit"]{
     border: none;
     cursor: pointer;
+    width: 50%;
+    padding: var(--space-md) var(--space-sm);
 }
 label{
     max-width: 70ch;
@@ -343,33 +350,40 @@ input[type="checkbox"]{
     width: 44px;
     height: 20px;
     margin-right: var(--space-xs);
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease;
 }
 ul:has(.group){
     grid-template-columns: repeat(auto-fit,minmax(240px,300px));
 }
-.center{
-    text-align: center;
-}
-.login{
+
+.isForm{
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--color-border);
-    width: 50vw;
-    padding: var(--space-2xl);
     gap: var(--space-md);
-    align-items: center;
-     margin: 0 auto;
-    input{
-       width: 60%;
-       padding: var(--space-sm);
-    }
-    button[type="submit"]{
-        width: 30%;
-        margin: 0 auto;
-    }
-    
+     
 }
-
+@media screen and (min-width: 280px) {
+    .isForm{
+        margin: 0;
+        width: 100%;
+        padding: 0;
+    }
+    input,textarea{
+        width: 100%;
+    }
+}
+@media screen and (min-width: 500px) {
+    .isForm{
+         max-width: 70%;
+         padding: var(--space-md); 
+         margin: 0 auto; 
+     }
+     .center{
+         text-align: center;
+     }
+}
 
 
 

@@ -1,7 +1,7 @@
 <%- include('partials/header')%>
 <main>
     <h1><%= title%></h1>
-    <form action="/edit-project/<%= projectId%>" method="post">
+    <form action="/edit-project/<%= projectId%>" method="post" class="isForm">
         <% projectDetails.forEach(project => { %>
             <div class="form-group">
             <label for="title">Enter Project Title</label>

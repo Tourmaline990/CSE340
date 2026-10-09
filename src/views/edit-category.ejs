@@ -1,11 +1,13 @@
 <%- include('partials/header')%>
 <main>
     <h1><%= title%></h1>
-    <form action="/edit-category/<%= id%>" method="post">
+    <form action="/edit-category/<%= id%>" method="post" class="isForm">
+        <%categoryData.forEach(category => { %>
         <div class="form-group">
             <label for="name">Enter category Name</label>
-            <input type="text" value="<%= categoryData[0].category_name%>" id="name" required maxlength="100" name="category_name">
+            <input type="text" value="<%= category.category_name%>" id="name" required maxlength="100" name="category_name">
         </div>
+        <% })%>
         <button type="submit">Edit Category</button>
     </form>
 </main>

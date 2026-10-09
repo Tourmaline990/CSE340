@@ -44,12 +44,16 @@ const authenticateUser = async(email,password) => {
     if(!user){
       return user;
     }
-    if(await verifyPassword(password,user.password_hash)){
+    const password_check = await verifyPassword(password,user.password_hash)
+    console.log("password verification result:",password_check);
+    if(password_check){
          const {password_hash, ...userWithoutHash} = user;
          console.log(userWithoutHash);
          return userWithoutHash;
         }
-    return user;
+        else{
+            return null;
+        }
 }
 
 const getAllUsers = async() => {
